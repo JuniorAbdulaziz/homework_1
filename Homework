@@ -1,0 +1,137 @@
+# 1
+import re
+PTRN = r'^(https?://)?(www\.)?([a-z-]*)\..+$'
+def domain_name(url):
+ """
+    Задача №1. Секция статьи "Задача №1."
+    Написать метод domain_name, который вернет домен из url адреса:
+    """
+
+     print(url)
+    return re.match(PTRN, url).groups()[2]
+
+domain_name("http://github.com/carbonfive/raygun") == "github" 
+domain_name("http://www.zombie-bites.com") == "zombie-bites"
+domain_name("https://www.cnet.com") == "cnet"
+
+
+# 2
+import struct
+import socket
+def ip_to_int32(int32):
+ """
+    Задача №2. Секция статьи "Задача №2."
+    Написать метод int32_to_ip, который принимает на вход 32-битное целое число
+    (integer) и возвращает строковое представление его в виде IPv4-адреса:
+    """
+
+    return struct.unpack("!I", socket.inet_aton(int32))[0]
+
+def int32_to_ip(int32):
+  return socket.inet_ntoa(struct.pack("!I", int32))
+
+print(ip_to_int32('10.0.0.1'))
+print(int32_to_ip(0xc0a80164))
+
+
+# 3
+def zeros(n):
+ """
+    Задача №3. Секция статьи "Задача №3."
+    Написать метод zeros, который принимает на вход целое число (integer) и
+    возвращает количество конечных нулей в факториале (N! = 1 * 2 * 3 * ... * N) заданного числа:
+    """
+
+  count_of_two = 0
+  count_of_five = 0
+  
+  for i in range(1, n + 1, 1):
+
+        val = i
+
+  
+
+        while (val % 2 == 0 and val > 0):
+
+            val /= 2
+            count_of_two += i
+
+  
+
+        while (val % 5 == 0 and val > 0):
+
+            val /= 5
+            count_of_five += i
+          
+    
+  
+  ans = min(count_of_two, count_of_five)
+  
+  
+  return ans
+
+  
+# Код драйвера
+
+if name == 'main':
+
+    n = 12
+  
+
+print(zeros(n))
+
+# 4 
+def bananas(s) -> set:
+  """
+    Задача №4. Секция статьи "Задача №4."
+    Написать метод bananas, который принимает на вход строку и
+    возвращает количество слов «banana» в строке.
+    """
+
+     result = set()
+    word = 'banana'
+    if word == '':
+        result.append(''.rjust(len(s), '-'))
+        return result
+ 
+    left_s = ''
+    for si in range(len(s)):
+        if word[0] == s[si]:
+            left_s = ''.rjust(si, '-') + s[si]
+            if s[si+1:] == '' and word[1:] == '':
+                result.append(left_s)
+            else:
+                right_s_list = bananas(s[si+1:])
+                for right_s in right_s_list:
+                    result.append(left_s + right_s)
+    return result
+print(bananas('bbananana'))
+
+
+# 5
+def count_find_num(primesL, limit):
+  """
+    Задача №5. Секция статьи "Задача №5."
+    Написать метод count_find_num, который принимает на вход список простых множителей (primesL) и целое число,
+    предел (limit), после чего попробуйте сгенерировать по порядку все числа.
+    Меньшие значения предела, которые имеют все и только простые множители простых чисел primesL.
+    """
+      primes = []
+    primes_new = []
+    Primescount = 1
+    Max_primes = 0
+    for i in range(0, len(primesL)):
+        Primescount *= primesL[i]
+    for i in range(0, limit):
+        primes.append(i)
+    for i in range(0, limit-1):
+        if primes[i] != 0 and primes[i] % Primescount == 0:
+            primes_new.append(primes[i])
+    for i in range(1, (len(primes_new)-1)):
+        if primes_new[i] > primes_new[i-1]:
+            Max_primes = primes_new[i]
+    return [len(primes_new)-1, Max_primes]
+ 
+primesL = list(map(int, input().split()))
+limit = int(input())
+print(count_find_num(primesL, limit))
